@@ -1,6 +1,7 @@
 from darkflow.net.build import TFNet
 import cv2
 import numpy as np
+from time import sleep
 
 options = {
         "model": "cfg/yolo.cfg",
@@ -12,15 +13,12 @@ tfnet = TFNet(options)
 
 cap = cv2.VideoCapture(0)
 
-class_names = ['aeroplane', 'bicycle', 'bird', 'boat', 'bottle',
-              'bus', 'car', 'cat', 'chair', 'cow', 'diningtable',
-              'dog', 'horse', 'motorbike', 'person', 'pottedplant',
-              'sheep', 'sofa', 'train', 'tvmonitor']
+class_names = ['chair', 'person']
 
 num_classes = len(class_names)
 class_colors = []
 for i in range(0, num_classes):
-    hue = 255*i/num_classes
+    hue = 255 * i / num_classes
     col = np.zeros((1,1,3)).astype("uint8")
     col[0][0][0] = hue
     col[0][0][1] = 128
@@ -30,10 +28,11 @@ for i in range(0, num_classes):
     class_colors.append(col)
 
 def main():
+    cnt = 0
     while(True):
         ret, frame = cap.read()
         result = tfnet.return_predict(frame)
-        
+
         for item in result:
             tlx = item['topleft']['x']
             tly = item['topleft']['y']
@@ -53,6 +52,10 @@ def main():
                 text = label + " " + ('%.2f' % conf)
                 cv2.rectangle(frame, (tlx, tly - 15), (tlx + 100, tly + 5), class_colors[class_num], -1)
                 cv2.putText(frame, text, (tlx, tly), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1)
+                cnt += 1
+                print(cnt)
+        cnt = 0
+                
 
         cv2.imshow("Show FLAME Image", frame)
 
