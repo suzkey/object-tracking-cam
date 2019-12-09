@@ -1,11 +1,16 @@
 Object tracking with OpenCV and TensorFlow.
 
-## getting start
+## getting start with pipenv
 ```console
 $ pipenv install
+$ pipenv run python server.py
 ```
+You will be able to check the camera startup by accessing localhost:5000.
 
-if `MemoryError`
+![](https://gyazo.com/cd208c4f54bcb46cd4ecdd0db459d48e)
+
+## `MemoryError`
+Please try this commands.
 ```console
 $ sudo fallocate -l 1G /var/swapfile
 $ sudo mkswap /var/swapfile
