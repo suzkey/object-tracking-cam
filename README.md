@@ -4,6 +4,7 @@ Object tracking with OpenCV and TensorFlow.
 ```console
 $ pipenv install
 $ git submodule update --init
+$ pipenv shell
 $ cd darkflow && python setup.py build_ext --inplace && pip install -e .
 $ pipenv run python server.py
 ```
