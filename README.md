@@ -1,4 +1,4 @@
-Object tracking with OpenCV and TensorFlow.
+Object tracking with OpenCV and TensorFlow, and serve it on the web.
 
 ## getting start with pipenv
 ```console
