@@ -3,31 +3,33 @@ import cv2
 import numpy as np
 from time import sleep
 
-options = {
+
+def main():
+    options = {
         "model": "cfg/yolo.cfg",
         "load": "bin/yolo.weights",
         "threshold": 0.1
         }
 
-tfnet = TFNet(options)
+    tfnet = TFNet(options)
 
-cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(0)
 
-class_names = ['chair', 'person']
+    class_names = ['chair', 'person']
 
-num_classes = len(class_names)
-class_colors = []
-for i in range(0, num_classes):
-    hue = 255 * i / num_classes
-    col = np.zeros((1,1,3)).astype("uint8")
-    col[0][0][0] = hue
-    col[0][0][1] = 128
-    col[0][0][2] = 255
-    cvcol = cv2.cvtColor(col, cv2.COLOR_HSV2BGR)
-    col = (int(cvcol[0][0][0]), int(cvcol[0][0][1]), int(cvcol[0][0][2]))
-    class_colors.append(col)
+    num_classes = len(class_names)
+    class_colors = []
 
-def main():
+    for i in range(0, num_classes):
+        hue = 255 * i / num_classes
+        col = np.zeros((1,1,3)).astype("uint8")
+        col[0][0][0] = hue
+        col[0][0][1] = 128
+        col[0][0][2] = 255
+        cvcol = cv2.cvtColor(col, cv2.COLOR_HSV2BGR)
+        col = (int(cvcol[0][0][0]), int(cvcol[0][0][1]), int(cvcol[0][0][2]))
+        class_colors.append(col)
+
     cnt = 0
     while(True):
         ret, frame = cap.read()
@@ -41,7 +43,7 @@ def main():
             label = item['label']
             conf = item['confidence']
 
-            if conf > 0.6:
+            if conf > 0.5:
                 for i in class_names:
                     if label == i:
                         class_num = class_names.index(i)
@@ -54,17 +56,22 @@ def main():
                 cv2.putText(frame, text, (tlx, tly), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1)
                 cnt += 1
                 print(cnt)
+
+        cv2.imwrite('t.jpg', frame)
+        yield (b'--frame\r\n'
+                b'Content-Type: image/jpeg\r\n\r\n' + open('t.jpg', 'rb').read() + b'\r\n')
         cnt = 0
-                
 
-        cv2.imshow("Show FLAME Image", frame)
 
-        k = cv2.waitKey(10);
-        if k == ord('q'):  break;
+        # cv2.imshow("Show FLAME Image", frame)
+
+        k = cv2.waitKey(10)
+        if k == ord('q'):  break
 
     cap.release()
     cv2.destroyAllWindows()
 
+"""
 if __name__ == '__main__':
     main()
-
+"""
