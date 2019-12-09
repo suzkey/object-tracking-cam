@@ -1,3 +1,4 @@
 [submodule "darkflow"]
 	path = darkflow
 	url = git@github.com:thtrieu/darkflow.git
+	ignore = dirty
