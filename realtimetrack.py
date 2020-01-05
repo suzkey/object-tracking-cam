@@ -56,6 +56,8 @@ def main():
                 cv2.putText(frame, text, (tlx, tly), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1)
                 cnt += 1
                 print(cnt)
+                with open("log.txt", 'a') as f:
+                    print(cnt, file=f)
 
         cv2.imwrite('t.jpg', frame)
         yield (b'--frame\r\n'

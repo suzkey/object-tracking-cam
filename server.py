@@ -10,7 +10,9 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     """Video streaming home page."""
-    return render_template('index.html')
+    with open("log.txt", 'r') as f:
+        cnt = f.readlines()[-1]
+    return render_template('index.html', n=cnt)
 
 
 @app.route('/video_feed')

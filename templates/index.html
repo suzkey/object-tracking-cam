@@ -1,10 +1,106 @@
 <html>
   <head>
     <title></title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
   </head>
   <body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="https://bulma.io">
+          <!--
+          <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+          -->
+        </a>
+
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item">
+            Home
+          </a>
+
+          <a class="navbar-item">
+            Camera
+          </a>
+
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">
+              More
+            </a>
+
+            <div class="navbar-dropdown">
+              <a class="navbar-item">
+                About
+              </a>
+              <a class="navbar-item">
+                Element
+              </a>
+              <a class="navbar-item">
+                Element
+              </a>
+              <hr class="navbar-divider">
+              <a class="navbar-item">
+                Privacy and Poricy
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <a class="button is-primary">
+                <strong>Sign up</strong>
+              </a>
+              <a class="button is-light">
+                Log in
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>    
     <div>
-      <img src="{{ url_for('video_feed') }}">
+      <!--
+        <img src="{{ url_for('video_feed') }}">
+      -->
+    </div>
+    <div class="tile is-ancestor">
+      <div class="tile is-vertical is-8">
+        <div class="tile">
+          <div class="tile is-parent">
+            <article class="tile is-child notification is-info">
+              <p class="title">Current congestion situation</p>
+              <p class="subtitle">{{ n }} people : Notation is at the time of update.</p>
+              <figure class="image is-4by3">
+                <img src="{{ url_for('video_feed') }}">
+              </figure>
+            </article>
+          </div>
+        </div>
+      </div>
+      <div class="tile is-parent">
+        <article class="tile is-child notification is-success">
+          <div class="content">
+            <p class="title">Locations</p>
+            <p class="subtitle">Change your location</p>
+            <div class="content">
+              <!-- Content -->
+              <div>- JR Saikyo Line</div>
+              <div>- JR Yamonote Line</div>
+              <div>- JR Syonan-Shinjuku Line</div>
+              <div>- JR Keihin-Tohoku Line</div>
+            </div>
+          </div>
+        </article>
+      </div>
     </div>
   </body>
 </html>
