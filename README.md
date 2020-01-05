@@ -10,7 +10,7 @@ $ pipenv run python server.py
 ```
 You will be able to check the camera startup by accessing localhost:5000.
 
-![](https://gyazo.com/cd208c4f54bcb46cd4ecdd0db459d48e.png)
+![](https://i.gyazo.com/1814043ab5576d2561554d0a25747b57.png)
 
 ## `MemoryError`
 Please try this commands.
