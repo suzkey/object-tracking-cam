@@ -8,7 +8,7 @@ numpy = "*"
 cython = "*"
 opencv-python = "*"
 opencv-contrib-python = "*"
-tensorflow = "==1.14.0"
+tensorflow = "==1.15.2"
 flask = "*"
 
 [requires]
